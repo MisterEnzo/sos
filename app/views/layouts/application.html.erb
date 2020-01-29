@@ -17,5 +17,6 @@
       <p class="alert"><%= alert %></p>
     <% end %>
     <%= yield %>
+    <%= yield :after_js %>
   </body>
 </html>
