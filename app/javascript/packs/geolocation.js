@@ -15,8 +15,8 @@ function geoFindMe() {
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
   // make a AJAX call to send the coordinates of the user
-    const body = {location: `${latitude}, ${longitude}`};
-    const url = `/sos/`;
+    const body = {'sos': {"location":`${latitude}, ${longitude}`}};
+    const url = "/sos/";
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
     const promise = fetch(url, {
       credentials: "same-origin",
@@ -27,8 +27,7 @@ function geoFindMe() {
         'X-CSRF-Token': csrfToken
       },
       body: JSON.stringify(body)
-    });
-    console.log(promise);    
+    })
   }
 
   function error() {
