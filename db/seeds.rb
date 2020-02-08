@@ -6,8 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Creating sample data."
 User.create(
   name: "enz",
   email: "enz@enz.com",
   password: 123123
 )
+
+3.times do |num|
+  Contact.create(
+    name: "Contact_#{num}",
+    email: "contact_#{num}@sos.com",
+    user_id: User.first.id
+  )
+end
+puts "Done seeding database"
