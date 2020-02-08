@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/sos', to: 'users/soss#new'
   post '/sos', to: 'users/soss#create'
 
+  resources :contacts
 end
