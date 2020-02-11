@@ -5,7 +5,7 @@ class SosMailer < ApplicationMailer
   #
   #   en.sos_mailer.send.subject
   #
-  def send
+  def send_sos
     @user = params[:user]
     contacts = @user.contacts.pluck(:email)
     mail to: contacts[0], subject: "Emergency SOS from #{@user.name}"
