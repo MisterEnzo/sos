@@ -7,6 +7,7 @@ class Users::SossController < ApplicationController
     user = current_user
     user.location = location
     user.save
+    UserMailer.with(user: current_user).send_sos.deliver_now
   end
   
   private
