@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'faker'
+gem 'pundit'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
