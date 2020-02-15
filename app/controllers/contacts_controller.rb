@@ -8,6 +8,7 @@ class ContactsController < ApplicationController
       @contacts = current_user.contacts
     else
       redirect_to user_session
+    end
   end
 
   def new
@@ -32,6 +33,15 @@ class ContactsController < ApplicationController
       redirect_to contact_path(@contact.id)
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    if @contact.user == current_user
+      @contact.destroy
+      redirect_to contacts_url
+    else
+      redirect_to contacts_url
     end
   end
 
