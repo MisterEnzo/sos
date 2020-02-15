@@ -2,6 +2,12 @@
   <div>
     <%= contact.name %>
     <%= contact.email %>
+    <% if policy(contact).edit? %>
+      <%= link_to "Edit", edit_contact_path(contact) %>
+    <% end %>
+    <% if policy(contact).destroy? %>
+      <%= link_to "Delete", contact_path(contact), method: :delete, data: { confirm: "Are you sure?"} %>
+    <% end %>
     <break>
   </div>
 <% end %>
