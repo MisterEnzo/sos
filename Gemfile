@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'faker'
 gem 'pundit'
+gem 'enz_view_tool', git: 'https://github.com/MisterEnzo/enz_view_tool_gem'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

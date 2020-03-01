@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/MisterEnzo/enz_view_tool_gem
+  revision: 035698b483cb72e81baad4405922f3ce947d99a9
+  specs:
+    enz_view_tool (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -246,6 +252,7 @@ DEPENDENCIES
   database_cleaner (~> 1.7)
   devise (~> 4.7, >= 4.7.1)
   dotenv-rails
+  enz_view_tool!
   factory_bot_rails (~> 5.1, >= 5.1.1)
   faker
   jbuilder (~> 2.7)

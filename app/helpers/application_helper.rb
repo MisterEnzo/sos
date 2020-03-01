@@ -8,4 +8,9 @@ module ApplicationHelper
       (link_to "Signup", new_user_registration_path, class: "btn btn-outline-primary")
     end
   end
+
+  def copyright_generator
+    EnzViewTool::Renderer.copyright "Enzo Naguiat", "All Rights Reserved"
+  end
+
 end
