@@ -1,7 +1,12 @@
-<button id = "find-me">Show my location</button><br/>
-<p id = "status"></p>
-<a id = "map-link" target="_blank"></a>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 sos">
+      <button type="button" id="find-me" class="btn btn-danger btn-lg">SOS</button><br/>
+      <p id = "status"></p>
+      <a id = "map-link" target="_blank"></a>
+    </div>
+  </div>
+</div>
 <% content_for :after_js do %>
   <%= javascript_pack_tag "geolocation" %>
 <% end %>
