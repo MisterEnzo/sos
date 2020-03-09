@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'home page' do
-  scenario 'visit home page' do
+RSpec.describe 'home page' do
+  it 'has the SOS logo, and login and signup buttons' do
     visit('/')
     expect(page).to have_content("SOS")
     expect(page).to have_link("Login")
