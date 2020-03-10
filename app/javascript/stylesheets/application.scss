@@ -14,10 +14,20 @@ main {
   height: 80vh;
 }
 
+
+#content {
+  position: relative;
+  height: auto !important;
+  min-height: 95%;
+}
+
 footer {
-  height: 2.5vh;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   text-align:center;
   vertical-align: auto;
+  padding-top: 2em;
 }
 
 .remember-me-checkbox {
@@ -26,4 +36,11 @@ footer {
 
 .sos {
   text-align: center;
+}
+
+.form {
+  margin-bottom: 3em;
+}
+.delete-button {
+  font-size: 1em;
 }

@@ -11,18 +11,18 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <main role="main" class="inner cover">
-      <% if !notice %>
-        <p class="notice"><%= notice %></p>
-      <% end %>
-      <% if !alert %>
-        <p class="alert"><%= alert %></p>
-      <% end %>
-      <div class="content">
-        <%= yield %>
-      </div>
-      <%= yield :after_js %>
-    </main>
-    <%= render 'layouts/footer' %>
+      <main role="main" class="inner cover">
+        <% if !notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if !alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+        <div id="content">
+          <%= yield %>
+          <%= render 'layouts/footer' %>
+        </div>
+        <%= yield :after_js %>
+      </main>
   </body>
 </html>
