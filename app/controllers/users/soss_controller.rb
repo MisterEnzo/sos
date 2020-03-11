@@ -1,5 +1,6 @@
 class Users::SossController < ApplicationController
   before_action :authenticate_user!
+  before_action :redirect_if_user_has_no_contacts
   
   def new
   end
@@ -16,6 +17,10 @@ class Users::SossController < ApplicationController
   
   def sos_params
     params.require(:sos).permit(:location)
+  end
+
+  def redirect_if_user_has_no_contacts
+    redirect_to new_contact_path if current_user.contacts.count == 0
   end
 
 end

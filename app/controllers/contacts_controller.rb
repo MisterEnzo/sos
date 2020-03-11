@@ -19,6 +19,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     @contact.user = current_user
     if @contact.save
+      flash[:notice] = "You have successfully added a contact"
       redirect_to contacts_path current_user
     else
       render 'new'

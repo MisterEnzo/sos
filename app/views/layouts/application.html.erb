@@ -12,12 +12,14 @@
   <body>
     <%= render 'layouts/navbar' %>
       <main role="main" class="inner cover">
-        <% if !notice %>
-          <p class="notice"><%= notice %></p>
-        <% end %>
-        <% if !alert %>
-          <p class="alert"><%= alert %></p>
-        <% end %>
+        <div id='flash-bar'>  
+          <% if flash[:notice] %>
+            <div class='alert alert-success'><%= flash[:notice] %></div>
+          <% end %>
+          <% if flash[:alert] %>
+            <div class='alert alert-danger'><%= flash[:alert] %></div>
+          <% end %>
+        </div>
         <div id="content">
           <%= yield %>
           <%= render 'layouts/footer' %>
