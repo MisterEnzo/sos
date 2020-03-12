@@ -44,3 +44,20 @@ footer {
 .delete-button {
   font-size: 1em;
 }
+
+.contact-actions {
+  float: right;
+}
+
+.contact {
+  vertical-align: middle;
+}
+
+.contact-name {
+  float: left;
+  line-height: 3em;
+}
+
+.contact > p {
+  margin-bottom: 0px;
+}

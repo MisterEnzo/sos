@@ -1,6 +1,7 @@
 module ApplicationHelper
   def login_helper
     if current_user
+      (link_to "Contacts", contacts_path, class: 'btn btn-outline-primary') +
       (link_to "Profile", edit_user_registration_path, class: "btn btn-outline-primary") + 
       (link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary")
     else

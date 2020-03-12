@@ -1,15 +1,25 @@
-<% @contacts.each do |contact| %>
-  <div>
-    <%= contact.name %>
-    <%= contact.email %>
-    <% if policy(contact).edit? %>
-      <%= link_to "Edit", edit_contact_path(contact) %>
-    <% end %>
-    <% if policy(contact).destroy? %>
-      <%= link_to "Delete", contact_path(contact), method: :delete, data: { confirm: "Are you sure?"} %>
-    <% end %>
-    <break>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-8 offset-md-2'>
+      <ul class='list-group'>
+      <% @contacts.each do |contact| %>
+        <li class='list-group-item contact'>
+          <p class='contact-name'>
+            <%= contact.name %>
+            (<%= contact.email %>)
+          </p>
+          <p class='contact-actions'>
+            <% if policy(contact).edit? %>
+              <%= link_to "Edit", edit_contact_path(contact), class: 'btn btn-info' %>
+            <% end %>
+            <% if policy(contact).destroy? %>
+              <%= link_to "Delete", contact_path(contact), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?"} %>
+            <% end %>
+          </p>
+        </li>
+      <% end %>
+      </ul>
+    </div>
   </div>
-<% end %>
-
-<%= link_to "Send an Sos", sos_path %>
+  <%= link_to "Send an Sos", sos_path %>
+</div>
