@@ -13,13 +13,14 @@
               <%= link_to "Edit", edit_contact_path(contact), class: 'btn btn-info' %>
             <% end %>
             <% if policy(contact).destroy? %>
-              <%= link_to "Delete", contact_path(contact), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?"} %>
+              <%= link_to "Delete", contact_path(contact), class: 'btn btn-warning', method: :delete, data: { confirm: "Are you sure?"} %>
             <% end %>
           </p>
         </li>
       <% end %>
+      <%= link_to "Add A New Contact", new_contact_path, class: 'btn btn-primary' %>
+      <%= link_to "Send an Sos", sos_path, class: 'btn btn-outline-danger' %>
       </ul>
     </div>
   </div>
-  <%= link_to "Send an Sos", sos_path %>
 </div>
