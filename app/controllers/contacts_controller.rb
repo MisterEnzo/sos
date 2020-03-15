@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
   def show
   end
 
@@ -53,5 +54,9 @@ class ContactsController < ApplicationController
 
     def set_contact
       @contact = Contact.find(params[:id])
+    end
+
+    def logged_in?
+      redirect_to new_user_session_path if !current_user
     end
 end
