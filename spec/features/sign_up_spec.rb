@@ -12,9 +12,20 @@ feature 'Signing up' do
     click_button('Sign up')
     expect(page).to have_content("Welcome! You have signed up successfully.")
     expect(User.last.name).to eq('sample')
-    expect(page).to have_content("Contact")
-    expect(page).to have_content("Name")
-    expect(page).to have_content("Email")
-    expect(page).to have_button("Add Contact")
+    expect(page).to have_content('Contact')
+    expect(page).to have_content('Name')
+    expect(page).to have_content('Email')
+    expect(page).to have_button('Add Contact')
+  end
+
+  scenario 'unsuccessfully signing-up a user' do
+    visit('/')
+    click_on('Sign-up')
+    expect(page).to have_current_path(new_user_registration_path)
+    fill_in 'user_name', with: 'sample'
+    click_on('Sign up')
+    expect(page).to have_content('2 errors')
+    expect(page).to have_content("Email can't be blank")
+    expect(page).to have_content("Password can't be blank")
   end
 end
