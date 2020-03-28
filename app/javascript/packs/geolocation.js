@@ -1,18 +1,18 @@
 function geoFindMe() {
 
   const status = document.querySelector('#status');
-  const mapLink = document.querySelector('#map-link');
+  // const mapLink = document.querySelector('#map-link');
 
-  mapLink.href = '';
-  mapLink.textContent = '';
+  // mapLink.href = '';
+  // mapLink.textContent = '';
 
   function success(position) {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
   // modify this to display in google maps
     status.textContent = '';
-    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    // mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    // mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
   // make a AJAX call to send the coordinates of the user
     const body = {'sos': {"location":`${latitude}, ${longitude}`}};
@@ -43,4 +43,12 @@ function geoFindMe() {
 
 }
 
-document.querySelector('#find-me').addEventListener('click', geoFindMe);
+function sendSOS(event) {
+  document.querySelector('#find-me').disabled = true;
+  geoFindMe();
+  setTimeout(function(){
+    document.querySelector('#find-me').disabled = false;
+  }, 10000);
+}
+
+document.querySelector('#find-me').addEventListener('click', sendSOS);
