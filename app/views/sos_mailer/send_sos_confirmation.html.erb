@@ -1,0 +1,8 @@
+<h1><%= @user.name %>, you just sent an SOS to your contacts</h1>
+
+<h2>Your last known location coordinates are: <%= @user.location %>
+
+<p>
+  Click here for a link to googlemap: <a href="http://www.google.com/maps/place/<%=@user.location.gsub(" ", "")%>">Google Map</a>
+</p>
+

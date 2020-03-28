@@ -11,6 +11,7 @@ class Users::SossController < ApplicationController
     user.location = location
     user.save
     SosMailer.with(user: user).send_sos.deliver_now
+    SosMailer.with(user: user).send_sos_confirmation.deliver_now
   end
   
   private
