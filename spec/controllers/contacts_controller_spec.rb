@@ -4,6 +4,7 @@ RSpec.describe ContactsController do
   describe "GET new" do
     let(:user) { FactoryBot.create(:user) }
     it "renders :new template when user is logged in" do
+      expect(user).to eq(User.first)
       sign_in(user)
       get :new
       expect(response).to have_http_status(:success)
@@ -22,6 +23,8 @@ RSpec.describe ContactsController do
     let(:user) { FactoryBot.create(:user) }
     let(:contact) { FactoryBot.create(:contact, user: user) }
     it "redirects to sign_in page if a user isn't logged-in" do
+      expect(user).to eq(User.first)
+      expect(contact).to eq(Contact.first)
       get :show, params: { id: contact.id }
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(new_user_session_path)

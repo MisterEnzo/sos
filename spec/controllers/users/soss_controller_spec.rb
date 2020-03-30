@@ -8,7 +8,7 @@ RSpec.describe Users::SossController do
       sign_in(user)
       expect(user).to eq(User.first)
       expect(contact).to eq(Contact.first)
-      # expect(User.count).to eq(1)
+      expect(User.count).to eq(1)
       # expect(ontacts.count).to eq(1)
       get :new
       # expect(response).to render_template(:new)
