@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ContactsController do
   describe "GET new" do
     let(:user) { FactoryBot.create(:user) }
+
     it "renders :new template when user is logged in" do
       expect(user).to eq(User.first)
       sign_in(user)
@@ -22,17 +23,37 @@ RSpec.describe ContactsController do
   describe "GET show" do
     let(:user) { FactoryBot.create(:user) }
     let(:contact) { FactoryBot.create(:contact, user: user) }
+
     it "redirects to sign_in page if a user isn't logged-in" do
       expect(user).to eq(User.first)
       expect(contact).to eq(Contact.first)
-      get :show, params: { id: contact.id }
+      get :show, params: {id: contact.id}
+      expect(assigns(:contact)).to eq(contact)
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(new_user_session_path)
     end
+
     it "renders :show template after user has logged in" do 
       sign_in(user)
       get :show, params: { id: contact.id }
+      expect(assigns(:contact)).to eq(contact)
       expect(response).to render_template(:show)
+    end
+  end
+
+  describe "POST create" do
+    let(:user) { FactoryBot.create(:user) }
+    it "redirects to contacts#index after successful creation of new contact" do
+      sign_in(user)
+      post :create, params: { contact: FactoryBot.attributes_for(:contact) }
+      expect(response).to redirect_to(contacts_path)
+    end
+
+    it "creates new contact in the database" do
+      sign_in(user)
+      expect {
+        post :create, params: { contact: FactoryBot.attributes_for(:contact) }
+      }.to change(Contact, :count).by(1)
     end
   end
 end
