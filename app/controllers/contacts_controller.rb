@@ -51,7 +51,12 @@ class ContactsController < ApplicationController
     end
 
     def set_contact
-      @contact = Contact.find(params[:id])
+      begin
+        @contact = Contact.find(params[:id])
+      rescue ActiveRecord::RecordNotFound 
+        redirect_to contacts_url
+        return
+      end
     end
 
     def logged_in?

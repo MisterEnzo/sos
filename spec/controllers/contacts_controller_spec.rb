@@ -36,5 +36,25 @@ RSpec.describe ContactsController do
       end
     end
   end
+
+  describe "GET edit" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:contact) { FactoryBot.create(:contact, user: user)}
+    
+    context "User doesn't sign-in" do
+      it "redirects user to sign-up when trying to edit" do
+        get :edit, params: { id: contact }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+    
+    context "User successfully signs-in" do
+      it "User is redirected to contacts#index if the contact to be edited doesn't exist" do
+        sign_in(:user)
+        get :edit, params: { id: 100 }
+        expect(response).to redirect_to(contacts_path)
+      end
+    end
+  end
 end
 
