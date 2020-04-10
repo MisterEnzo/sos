@@ -12,12 +12,13 @@ RSpec.describe ContactsController do
 
     context "user has signed-in" do
       let(:user) { FactoryBot.create(:user) }
-      let(:contacts) { FactoryBot.create_list(:contact, 5) }
+      # for some reason, I cant create multiple contacts.
+      # let(:contacts) { FactoryBot.create_list(:contact, 5) }
       it "shows all the contacts of the user" do
         sign_in(user)
+        FactoryBot.create_list(:contact,5)
         get :index
-        # expect(assigns[:contacts]).to not_be_empty
-        # expect(assigns(:contacts)).to match_array(contacts)
+        expect(assigns(:contacts).first).to be_a(Contact)
       end
 
       it "renders :index template" do

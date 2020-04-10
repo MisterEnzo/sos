@@ -9,9 +9,9 @@ RSpec.describe Users::SossController do
       expect(user).to eq(User.first)
       expect(contact).to eq(Contact.first)
       expect(User.count).to eq(1)
-      # expect(ontacts.count).to eq(1)
+      expect(Contact.count).to eq(1)
       get :new
-      # expect(response).to render_template(:new)
+      expect(response).to render_template(:new)
     end
   end
 end
