@@ -12,13 +12,11 @@ RSpec.describe ContactsController do
 
     context "user has signed-in" do
       let(:user) { FactoryBot.create(:user) }
-      # for some reason, I cant create multiple contacts.
-      # let(:contacts) { FactoryBot.create_list(:contact, 5) }
+      let(:contacts) { FactoryBot.create_list(:contact, 5, user: user) }
       it "shows all the contacts of the user" do
         sign_in(user)
-        FactoryBot.create_list(:contact,5)
         get :index
-        expect(assigns(:contacts).first).to be_a(Contact)
+        expect(assigns(:contacts)).to eq(contacts)
       end
 
       it "renders :index template" do
@@ -80,7 +78,7 @@ RSpec.describe ContactsController do
 
   describe "GET edit" do
     let(:user) { FactoryBot.create(:user) }
-    let(:contact) { FactoryBot.create(:contact)}
+    let(:contact) { FactoryBot.create(:contact, user: user )}
     
     context "User doesn't sign-in" do
       it "redirects user to sign-up when trying to edit" do
@@ -100,6 +98,40 @@ RSpec.describe ContactsController do
         sign_in(:user)
         get :edit, params: { id: contact.id }
         expect(assigns(:contact)).to eq(contact)
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
+
+  describe "PUT update" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:contact) { FactoryBot.create(:contact, user: user) }
+    let(:valid_data) { FactoryBot.attributes_for(:contact, email: "valid@test.com") }
+    let(:invalid_data) { FactoryBot.attributes_for(:contact, email: "") }
+    context "user signs-in successfully" do
+      context "valid data" do
+        it "modifies the contact's properties" do
+          sign_in(user)
+          byebug
+          put :update, params: { id: contact.id, contact: valid_data }
+          expect(Contact.last.email).to eq("valid@test.com")
+          expect(response).to redirect_to(contacts_path)
+        end
+      end
+
+      context "invalid data" do
+        it "redirects to edit page" do  
+          sign_in(user)
+          put :edit, params: {id: contact.id, contact: invalid_data}
+          expect(response).to render_template(:edit)
+        end
+      end
+    end
+
+    context "user doesn't sign in" do
+      it "redirects user to sign-in page" do
+        put :update, params: {id: contact.id, contact: valid_data }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

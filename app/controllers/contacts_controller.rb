@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
 
   def update
     if @contact.update(contact_params)
-      redirect_to contact_path(@contact.id)
+      redirect_to contacts_path
     else
       render 'edit'
     end
