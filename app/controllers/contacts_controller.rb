@@ -26,10 +26,15 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    if @contact.user != current_user
+      flash[:alert] = "You are not permitted to edit other user's contacts."
+      redirect_to contacts_path
+    end
   end
 
   def update
     if @contact.update(contact_params)
+      flash[:notice] = "You have successfully modified your contact."
       redirect_to contacts_path
     else
       render 'edit'
@@ -39,6 +44,7 @@ class ContactsController < ApplicationController
   def destroy
     if @contact.user == current_user
       @contact.destroy
+      flash[:notice] = "You have successfully deleted your contact."
       redirect_to contacts_url
     else
       redirect_to contacts_url
