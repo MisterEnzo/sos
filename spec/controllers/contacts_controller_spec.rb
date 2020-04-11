@@ -112,9 +112,9 @@ RSpec.describe ContactsController do
       context "valid data" do
         it "modifies the contact's properties" do
           sign_in(user)
-          byebug
           put :update, params: { id: contact.id, contact: valid_data }
-          expect(Contact.last.email).to eq("valid@test.com")
+          contact.reload
+          expect(contact.email).to eq("valid@test.com")
           expect(response).to redirect_to(contacts_path)
         end
       end
@@ -125,6 +125,13 @@ RSpec.describe ContactsController do
           put :edit, params: {id: contact.id, contact: invalid_data}
           expect(response).to render_template(:edit)
         end
+
+        it "doesn't update the contact in the database" do
+          sign_in(user)
+          put :edit, params: { id: contact.id, contact: invalid_data}
+          contact.reload
+          expect(contact.email).to_not eq("")
+        end
       end
     end
 
@@ -134,6 +141,34 @@ RSpec.describe ContactsController do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+  end
+
+  describe "DELETE destroy" do
+    context "user successfully signs-in" do
+      let(:user) { FactoryBot.create(:user) }
+      let(:contact) { FactoryBot.create(:contact, user: user) }
+      it "deletes the contact in the database" do
+        sign_in(user)
+        delete :destroy, params: { id: contact.id }
+        expect(Contact.exists?(contact.id)).to be_falsy
+      end
+      
+      it "redirects to contacts#index" do
+        sign_in(user)
+        delete :destroy, params: { id: contact.id }
+        expect(Contact.exists?(contact.id)).to be_falsy
+        expect(response).to redirect_to(contacts_path)
+      end
+    end
+    
+    context "user doesn't sign-in" do
+      let(:contact) { FactoryBot.create(:contact, user: FactoryBot.create(:user)) }
+      it "redirects to sign-up page" do
+        delete :destroy, params: { id: contact.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 end
 
