@@ -22,6 +22,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
+require 'devise'
 require 'support/database_cleaner'
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 

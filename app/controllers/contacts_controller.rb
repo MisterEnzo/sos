@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:edit, :update, :destroy]
-  before_action :logged_in?
+  before_action :authenticate_user!
 
   def index
     if current_user
@@ -57,9 +57,5 @@ class ContactsController < ApplicationController
         redirect_to contacts_url
         return
       end
-    end
-
-    def logged_in?
-      redirect_to new_user_session_path if !current_user
     end
 end
