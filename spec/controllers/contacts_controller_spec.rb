@@ -89,13 +89,13 @@ RSpec.describe ContactsController do
     
     context "User successfully signs-in" do
       it "User is redirected to contacts#index if the contact to be edited doesn't exist" do
-        sign_in(:user)
+        sign_in(user)
         get :edit, params: { id: 100 }
         expect(response).to redirect_to(contacts_path)
       end
 
       it "User is presented with the correct contact to edit" do
-        sign_in(:user)
+        sign_in(user)
         get :edit, params: { id: contact.id }
         expect(assigns(:contact)).to eq(contact)
         expect(response).to render_template(:edit)
