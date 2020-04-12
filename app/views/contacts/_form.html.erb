@@ -1,4 +1,13 @@
 <%= form_for contact do |f| %>
+  <% if contact.errors.any? %>
+    <div class="alert alert-danger" role="alert" id="error_explanation">
+      <ul>
+        <% contact.errors.full_messages.each do |message| %>
+          <li><%= message %></li>  
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class='form-group'>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>

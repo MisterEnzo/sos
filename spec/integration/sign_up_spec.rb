@@ -24,7 +24,6 @@ feature 'Signing up' do
     expect(page).to have_current_path(new_user_registration_path)
     fill_in 'user_name', with: 'sample'
     click_on('Sign up')
-    expect(page).to have_content('2 errors')
     expect(page).to have_content("Email can't be blank")
     expect(page).to have_content("Password can't be blank")
   end
